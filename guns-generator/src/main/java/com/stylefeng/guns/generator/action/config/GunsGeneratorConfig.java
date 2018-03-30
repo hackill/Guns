@@ -57,7 +57,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     protected void contextConfig() {
 
         contextConfig.setProPackage("com.stylefeng.guns");
-        contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
+//        contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
         contextConfig.setBizChName("订单业务");
         contextConfig.setBizEnName("order");
         contextConfig.setModuleName("system");

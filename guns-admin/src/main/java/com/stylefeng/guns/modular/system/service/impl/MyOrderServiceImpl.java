@@ -1,8 +1,8 @@
-package com.stylefeng.guns.modular.system.TTT;
+package com.stylefeng.guns.modular.system.service.impl;
 
 import com.stylefeng.guns.modular.system.model.MyOrder;
 import com.stylefeng.guns.modular.system.dao.MyOrderMapper;
-import com.stylefeng.guns.modular.system.TTT.IMyOrderService;
+import com.stylefeng.guns.modular.system.service.IMyOrderService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
