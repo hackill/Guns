@@ -48,34 +48,14 @@ public abstract class AbstractGeneratorConfig {
     public void init() {
         config();
 
-        packageConfig.setService(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service");
-        packageConfig.setServiceImpl(contextConfig.getProPackage() + ".modular." + contextConfig.getModuleName() + ".service.impl");
-
-        //controller没用掉,生成之后会自动删掉
-        packageConfig.setController("TTT");
-
-        if (!contextConfig.getEntitySwitch()) {
-            packageConfig.setEntity("TTT");
-        }
-
-        if (!contextConfig.getDaoSwitch()) {
-            packageConfig.setMapper("TTT");
-            packageConfig.setXml("TTT");
-        }
-
-        if (!contextConfig.getServiceSwitch()) {
-            packageConfig.setService("TTT");
-            packageConfig.setServiceImpl("TTT");
-        }
-
     }
 
     /**
      * 删除不必要的代码
      */
     public void destory() {
-        String outputDir = globalConfig.getOutputDir() + "/TTT";
-        FileUtil.deleteDir(new File(outputDir));
+//        String outputDir = globalConfig.getOutputDir() + "/TTT";
+//        FileUtil.deleteDir(new File(outputDir));
     }
 
     public AbstractGeneratorConfig() {
