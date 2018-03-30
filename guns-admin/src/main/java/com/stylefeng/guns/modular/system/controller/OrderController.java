@@ -1,16 +1,20 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
-import org.springframework.web.bind.annotation.RequestParam;
+import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.MyOrder;
 import com.stylefeng.guns.modular.system.service.IMyOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 /**
  * 订单业务控制器
@@ -49,7 +53,7 @@ public class OrderController extends BaseController {
     @RequestMapping("/order_update/{orderId}")
     public String orderUpdate(@PathVariable Integer orderId, Model model) {
         MyOrder order = orderService.selectById(orderId);
-        model.addAttribute("item",order);
+        model.addAttribute("item", order);
         LogObjectHolder.me().set(order);
         return PREFIX + "order_edit.html";
     }
@@ -60,6 +64,15 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
+
+        System.out.println("condition = " + condition);
+
+        if (ToolUtil.isNotEmpty(condition)) {
+            EntityWrapper<MyOrder> myOrderEntityWrapper = new EntityWrapper<>();
+            myOrderEntityWrapper.like("good", "%" + condition + "%");
+            return orderService.selectList(myOrderEntityWrapper);
+        }
+
         return orderService.selectList(null);
     }
 
@@ -69,7 +82,10 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(MyOrder order) {
-        orderService.insert(order);
+        if (order != null) {
+            order.setCreatetime(new Date());
+            orderService.insert(order);
+        }
         return SUCCESS_TIP;
     }
 

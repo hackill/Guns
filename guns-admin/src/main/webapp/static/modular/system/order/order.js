@@ -14,7 +14,7 @@ var Order = {
 Order.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键', field: 'id', visible: true, align: 'center', valign: 'middle'},
+            {title: '主键', field: 'id', visible: false, align: 'center', valign: 'middle'},
             {title: '价格', field: 'price', visible: true, align: 'center', valign: 'middle'},
             {title: '地区', field: 'place', visible: true, align: 'center', valign: 'middle'},
             {title: '商品名称', field: 'good', visible: true, align: 'center', valign: 'middle'},
