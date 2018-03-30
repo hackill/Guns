@@ -55,13 +55,15 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     }
 
     protected void contextConfig() {
-        contextConfig.setProPackage("com.stylefeng.guns.admin");
+
+        contextConfig.setProPackage("com.stylefeng.guns");
         contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
-        contextConfig.setBizChName("字典管理");
-        contextConfig.setBizEnName("sysDict");
+        contextConfig.setBizChName("订单业务");
+        contextConfig.setBizEnName("order");
         contextConfig.setModuleName("system");
-        contextConfig.setProjectPath("D:\\ideaSpace\\guns\\guns-admin");//写自己项目的绝对路径
-        contextConfig.setEntityName("SysDict");
+        contextConfig.setProjectPath("/Users/hackill/IntellijProjects/Guns/guns-admin");//写自己项目的绝对路径
+        contextConfig.setEntityName("MyOrder");
+
         sqlConfig.setParentMenuName(null);//这里写已有菜单的名称,当做父节点
 
         /**
