@@ -16,11 +16,11 @@ import java.sql.SQLException;
 @ConfigurationProperties(prefix = "spring.datasource")
 public class DruidProperties {
 
-    private String url = "jdbc:mysql://127.0.0.1:3306/guns?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
+    private String url = "jdbc:mysql://121.199.26.46:3306/gear?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
 
-    private String username = "root";
+    private String username = "bonguser";
 
-    private String password = "root";
+    private String password = "bongtest";
 
     private String driverClassName = "com.mysql.jdbc.Driver";
 
