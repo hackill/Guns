@@ -11,9 +11,9 @@ public class Base64Test {
      * Shiro 记住密码采用的是AES加密，AES key length 需要是16位，该方法生成16位的key
      */
     public static void main(String[] args) {
-    	
+
         String keyStr = "guns";
-        
+
         byte[] keys;
 		try {
 			keys = keyStr.getBytes("UTF-8");
@@ -21,7 +21,7 @@ public class Base64Test {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-        
+
     }
 
 }
