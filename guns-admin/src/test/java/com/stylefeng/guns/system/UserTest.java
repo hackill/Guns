@@ -1,7 +1,7 @@
 package com.stylefeng.guns.system;
 
 import com.stylefeng.guns.base.BaseJunit;
-import com.stylefeng.guns.modular.system.dao.UserMapper;
+import com.stylefeng.guns.modular.system.dao.SysUserMapper;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class UserTest extends BaseJunit {
 
     @Resource
-    UserMapper userMapper;
+    SysUserMapper userMapper;
 
     @Test
     public void userTest() throws Exception {

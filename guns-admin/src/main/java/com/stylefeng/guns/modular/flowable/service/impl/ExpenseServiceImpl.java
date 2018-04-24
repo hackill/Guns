@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.common.constant.state.ExpenseState;
-import com.stylefeng.guns.modular.system.dao.ExpenseMapper;
-import com.stylefeng.guns.modular.system.model.Expense;
+import com.stylefeng.guns.modular.system.dao.SysExpenseMapper;
+import com.stylefeng.guns.modular.system.model.SysExpense;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.support.HttpKit;
 import com.stylefeng.guns.modular.flowable.model.TaskVo;
@@ -36,7 +36,7 @@ import java.util.List;
  * @since 2017-12-04
  */
 @Service
-public class ExpenseServiceImpl extends ServiceImpl<ExpenseMapper, Expense> implements IExpenseService {
+public class ExpenseServiceImpl extends ServiceImpl<SysExpenseMapper, SysExpense> implements IExpenseService {
 
     @Autowired
     private RuntimeService runtimeService;
@@ -52,7 +52,7 @@ public class ExpenseServiceImpl extends ServiceImpl<ExpenseMapper, Expense> impl
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void add(Expense expense) {
+    public void add(SysExpense expense) {
         //保存业务数据
         expense.setUserid(ShiroKit.getUser().getId());
         expense.setState(ExpenseState.SUBMITING.getCode());
@@ -69,7 +69,7 @@ public class ExpenseServiceImpl extends ServiceImpl<ExpenseMapper, Expense> impl
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(Integer expenseId) {
-        Expense expense = this.selectById(expenseId);
+        SysExpense expense = this.selectById(expenseId);
         List<ProcessInstance> list = runtimeService.createProcessInstanceQuery().processInstanceId(expense.getProcessId()).list();
         for (ProcessInstance processInstance : list) {
             if (processInstance.getId().equals(expense.getProcessId())) {
@@ -96,8 +96,8 @@ public class ExpenseServiceImpl extends ServiceImpl<ExpenseMapper, Expense> impl
         ProcessInstance pi = runtimeService.createProcessInstanceQuery()//
                 .processInstanceId(task.getProcessInstanceId())//使用流程实例ID查询
                 .singleResult();
-        Wrapper<Expense> wrapper = new EntityWrapper<Expense>().eq("processId", task.getProcessInstanceId());
-        Expense expense = this.selectOne(wrapper);
+        Wrapper<SysExpense> wrapper = new EntityWrapper<SysExpense>().eq("processId", task.getProcessInstanceId());
+        SysExpense expense = this.selectOne(wrapper);
 
         //审核通过修改为通过状态
         if (pi == null) {
@@ -142,7 +142,7 @@ public class ExpenseServiceImpl extends ServiceImpl<ExpenseMapper, Expense> impl
 
     @Override
     public void printProcessImage(Integer expenseId) throws IOException {
-        Expense expense = this.selectById(expenseId);
+        SysExpense expense = this.selectById(expenseId);
         String processId = expense.getProcessId();
         ProcessInstance pi = runtimeService.createProcessInstanceQuery().processInstanceId(processId).singleResult();
 

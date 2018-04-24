@@ -2,7 +2,7 @@ package com.stylefeng.guns.modular.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.core.datascope.DataScope;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
  * @author stylefeng123
  * @since 2018-02-22
  */
-public interface IUserService extends IService<User> {
+public interface IUserService extends IService<SysUser> {
 
     /**
      * 修改用户状态
@@ -41,6 +41,6 @@ public interface IUserService extends IService<User> {
     /**
      * 通过账号获取用户
      */
-    User getByAccount(@Param("account") String account);
+    SysUser getByAccount(@Param("account") String account);
 
 }

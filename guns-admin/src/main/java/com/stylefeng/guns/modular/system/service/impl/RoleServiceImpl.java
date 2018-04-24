@@ -3,10 +3,10 @@ package com.stylefeng.guns.modular.system.service.impl;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.util.Convert;
-import com.stylefeng.guns.modular.system.dao.RelationMapper;
-import com.stylefeng.guns.modular.system.dao.RoleMapper;
-import com.stylefeng.guns.modular.system.model.Relation;
-import com.stylefeng.guns.modular.system.model.Role;
+import com.stylefeng.guns.modular.system.dao.SysRelationMapper;
+import com.stylefeng.guns.modular.system.dao.SysRoleMapper;
+import com.stylefeng.guns.modular.system.model.SysRelation;
+import com.stylefeng.guns.modular.system.model.SysRole;
 import com.stylefeng.guns.modular.system.service.IRoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
+public class RoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements IRoleService {
 
     @Resource
-    private RoleMapper roleMapper;
+    private SysRoleMapper roleMapper;
 
     @Resource
-    private RelationMapper relationMapper;
+    private SysRelationMapper relationMapper;
 
     @Override
     @Transactional(readOnly = false)
@@ -33,7 +33,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
 
         // 添加新的权限
         for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
-            Relation relation = new Relation();
+            SysRelation relation = new SysRelation();
             relation.setRoleid(roleId);
             relation.setMenuid(id);
             this.relationMapper.insert(relation);

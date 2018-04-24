@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.node.MenuNode;
 import com.stylefeng.guns.core.node.ZTreeNode;
-import com.stylefeng.guns.modular.system.dao.MenuMapper;
-import com.stylefeng.guns.modular.system.model.Menu;
+import com.stylefeng.guns.modular.system.dao.SysMenuMapper;
+import com.stylefeng.guns.modular.system.model.SysMenu;
 import com.stylefeng.guns.modular.system.service.IMenuService;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,10 @@ import java.util.Map;
  * @date 2017-05-05 22:20
  */
 @Service
-public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
+public class MenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements IMenuService {
 
     @Resource
-    private MenuMapper menuMapper;
+    private SysMenuMapper menuMapper;
 
     @Override
     public void delMenu(Long menuId) {
@@ -39,16 +39,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public void delMenuContainSubMenus(Long menuId) {
 
-        Menu menu = menuMapper.selectById(menuId);
+        SysMenu menu = menuMapper.selectById(menuId);
 
         //删除当前菜单
         delMenu(menuId);
 
         //删除所有子菜单
-        Wrapper<Menu> wrapper = new EntityWrapper<>();
+        Wrapper<SysMenu> wrapper = new EntityWrapper<>();
         wrapper = wrapper.like("pcodes", "%[" + menu.getCode() + "]%");
-        List<Menu> menus = menuMapper.selectList(wrapper);
-        for (Menu temp : menus) {
+        List<SysMenu> menus = menuMapper.selectList(wrapper);
+        for (SysMenu temp : menus) {
             delMenu(temp.getId());
         }
     }

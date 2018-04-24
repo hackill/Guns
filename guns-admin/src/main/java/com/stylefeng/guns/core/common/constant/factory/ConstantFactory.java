@@ -30,12 +30,12 @@ import java.util.List;
 @DependsOn("springContextHolder")
 public class ConstantFactory implements IConstantFactory {
 
-    private RoleMapper roleMapper = SpringContextHolder.getBean(RoleMapper.class);
-    private DeptMapper deptMapper = SpringContextHolder.getBean(DeptMapper.class);
-    private DictMapper dictMapper = SpringContextHolder.getBean(DictMapper.class);
-    private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
-    private MenuMapper menuMapper = SpringContextHolder.getBean(MenuMapper.class);
-    private NoticeMapper noticeMapper = SpringContextHolder.getBean(NoticeMapper.class);
+    private SysRoleMapper roleMapper = SpringContextHolder.getBean(SysRoleMapper.class);
+    private SysDeptMapper deptMapper = SpringContextHolder.getBean(SysDeptMapper.class);
+    private SysDictMapper dictMapper = SpringContextHolder.getBean(SysDictMapper.class);
+    private SysUserMapper userMapper = SpringContextHolder.getBean(SysUserMapper.class);
+    private SysMenuMapper menuMapper = SpringContextHolder.getBean(SysMenuMapper.class);
+    private SysNoticeMapper noticeMapper = SpringContextHolder.getBean(SysNoticeMapper.class);
 
     public static IConstantFactory me() {
         return SpringContextHolder.getBean("constantFactory");
@@ -49,7 +49,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getUserNameById(Integer userId) {
-        User user = userMapper.selectById(userId);
+        SysUser user = userMapper.selectById(userId);
         if (user != null) {
             return user.getName();
         } else {
@@ -65,7 +65,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getUserAccountById(Integer userId) {
-        User user = userMapper.selectById(userId);
+        SysUser user = userMapper.selectById(userId);
         if (user != null) {
             return user.getAccount();
         } else {
@@ -82,7 +82,7 @@ public class ConstantFactory implements IConstantFactory {
         Integer[] roles = Convert.toIntArray(roleIds);
         StringBuilder sb = new StringBuilder();
         for (int role : roles) {
-            Role roleObj = roleMapper.selectById(role);
+            SysRole roleObj = roleMapper.selectById(role);
             if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
                 sb.append(roleObj.getName()).append(",");
             }
@@ -99,7 +99,7 @@ public class ConstantFactory implements IConstantFactory {
         if (0 == roleId) {
             return "--";
         }
-        Role roleObj = roleMapper.selectById(roleId);
+        SysRole roleObj = roleMapper.selectById(roleId);
         if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
             return roleObj.getName();
         }
@@ -115,7 +115,7 @@ public class ConstantFactory implements IConstantFactory {
         if (0 == roleId) {
             return "--";
         }
-        Role roleObj = roleMapper.selectById(roleId);
+        SysRole roleObj = roleMapper.selectById(roleId);
         if (ToolUtil.isNotEmpty(roleObj) && ToolUtil.isNotEmpty(roleObj.getName())) {
             return roleObj.getTips();
         }
@@ -128,7 +128,7 @@ public class ConstantFactory implements IConstantFactory {
     @Override
     @Cacheable(value = Cache.CONSTANT, key = "'" + CacheKey.DEPT_NAME + "'+#deptId")
     public String getDeptName(Integer deptId) {
-        Dept dept = deptMapper.selectById(deptId);
+        SysDept dept = deptMapper.selectById(deptId);
         if (ToolUtil.isNotEmpty(dept) && ToolUtil.isNotEmpty(dept.getFullname())) {
             return dept.getFullname();
         }
@@ -143,7 +143,7 @@ public class ConstantFactory implements IConstantFactory {
         Integer[] menus = Convert.toIntArray(menuIds);
         StringBuilder sb = new StringBuilder();
         for (int menu : menus) {
-            Menu menuObj = menuMapper.selectById(menu);
+            SysMenu menuObj = menuMapper.selectById(menu);
             if (ToolUtil.isNotEmpty(menuObj) && ToolUtil.isNotEmpty(menuObj.getName())) {
                 sb.append(menuObj.getName()).append(",");
             }
@@ -159,7 +159,7 @@ public class ConstantFactory implements IConstantFactory {
         if (ToolUtil.isEmpty(menuId)) {
             return "";
         } else {
-            Menu menu = menuMapper.selectById(menuId);
+            SysMenu menu = menuMapper.selectById(menuId);
             if (menu == null) {
                 return "";
             } else {
@@ -176,9 +176,9 @@ public class ConstantFactory implements IConstantFactory {
         if (ToolUtil.isEmpty(code)) {
             return "";
         } else {
-            Menu param = new Menu();
+            SysMenu param = new SysMenu();
             param.setCode(code);
-            Menu menu = menuMapper.selectOne(param);
+            SysMenu menu = menuMapper.selectOne(param);
             if (menu == null) {
                 return "";
             } else {
@@ -195,7 +195,7 @@ public class ConstantFactory implements IConstantFactory {
         if (ToolUtil.isEmpty(dictId)) {
             return "";
         } else {
-            Dict dict = dictMapper.selectById(dictId);
+            SysDict dict = dictMapper.selectById(dictId);
             if (dict == null) {
                 return "";
             } else {
@@ -212,7 +212,7 @@ public class ConstantFactory implements IConstantFactory {
         if (ToolUtil.isEmpty(dictId)) {
             return "";
         } else {
-            Notice notice = noticeMapper.selectById(dictId);
+            SysNotice notice = noticeMapper.selectById(dictId);
             if (notice == null) {
                 return "";
             } else {
@@ -226,16 +226,16 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public String getDictsByName(String name, Integer val) {
-        Dict temp = new Dict();
+        SysDict temp = new SysDict();
         temp.setName(name);
-        Dict dict = dictMapper.selectOne(temp);
+        SysDict dict = dictMapper.selectOne(temp);
         if (dict == null) {
             return "";
         } else {
-            Wrapper<Dict> wrapper = new EntityWrapper<>();
+            Wrapper<SysDict> wrapper = new EntityWrapper<>();
             wrapper = wrapper.eq("pid", dict.getId());
-            List<Dict> dicts = dictMapper.selectList(wrapper);
-            for (Dict item : dicts) {
+            List<SysDict> dicts = dictMapper.selectList(wrapper);
+            for (SysDict item : dicts) {
                 if (item.getNum() != null && item.getNum().equals(val)) {
                     return item.getName();
                 }
@@ -272,12 +272,12 @@ public class ConstantFactory implements IConstantFactory {
      * 查询字典
      */
     @Override
-    public List<Dict> findInDict(Integer id) {
+    public List<SysDict> findInDict(Integer id) {
         if (ToolUtil.isEmpty(id)) {
             return null;
         } else {
-            EntityWrapper<Dict> wrapper = new EntityWrapper<>();
-            List<Dict> dicts = dictMapper.selectList(wrapper.eq("pid", id));
+            EntityWrapper<SysDict> wrapper = new EntityWrapper<>();
+            List<SysDict> dicts = dictMapper.selectList(wrapper.eq("pid", id));
             if (dicts == null || dicts.size() == 0) {
                 return null;
             } else {
@@ -299,14 +299,14 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public List<Integer> getSubDeptId(Integer deptid) {
-        Wrapper<Dept> wrapper = new EntityWrapper<>();
+        Wrapper<SysDept> wrapper = new EntityWrapper<>();
         wrapper = wrapper.like("pids", "%[" + deptid + "]%");
-        List<Dept> depts = this.deptMapper.selectList(wrapper);
+        List<SysDept> depts = this.deptMapper.selectList(wrapper);
 
         ArrayList<Integer> deptids = new ArrayList<>();
 
         if(depts != null && depts.size() > 0){
-            for (Dept dept : depts) {
+            for (SysDept dept : depts) {
                 deptids.add(dept.getId());
             }
         }
@@ -319,7 +319,7 @@ public class ConstantFactory implements IConstantFactory {
      */
     @Override
     public List<Integer> getParentDeptIds(Integer deptid) {
-        Dept dept = deptMapper.selectById(deptid);
+        SysDept dept = deptMapper.selectById(deptid);
         String pids = dept.getPids();
         String[] split = pids.split(",");
         ArrayList<Integer> parentDeptIds = new ArrayList<>();

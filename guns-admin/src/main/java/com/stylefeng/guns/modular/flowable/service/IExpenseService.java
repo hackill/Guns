@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.flowable.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.stylefeng.guns.modular.system.model.Expense;
+import com.stylefeng.guns.modular.system.model.SysExpense;
 import com.stylefeng.guns.modular.flowable.model.TaskVo;
 
 import java.io.IOException;
@@ -15,12 +15,12 @@ import java.util.List;
  * @author stylefeng
  * @since 2017-12-04
  */
-public interface IExpenseService extends IService<Expense> {
+public interface IExpenseService extends IService<SysExpense> {
 
     /**
      * 新增一个报销单
      */
-    void add(Expense expense);
+    void add(SysExpense expense);
 
     /**
      * 删除一个报销单

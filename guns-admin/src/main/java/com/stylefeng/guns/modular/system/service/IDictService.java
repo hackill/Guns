@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.stylefeng.guns.modular.system.model.Dict;
+import com.stylefeng.guns.modular.system.model.SysDict;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017-04-27 17:00
  */
-public interface IDictService extends IService<Dict> {
+public interface IDictService extends IService<SysDict> {
 
     /**
      * 添加字典
@@ -33,7 +33,7 @@ public interface IDictService extends IService<Dict> {
     /**
      * 根据编码获取词典列表
      */
-    List<Dict> selectByCode(@Param("code") String code);
+    List<SysDict> selectByCode(@Param("code") String code);
 
     /**
      * 查询字典列表

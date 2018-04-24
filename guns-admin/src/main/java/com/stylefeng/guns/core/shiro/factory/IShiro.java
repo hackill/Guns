@@ -1,7 +1,7 @@
 package com.stylefeng.guns.core.shiro.factory;
 
 import com.stylefeng.guns.core.shiro.ShiroUser;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 
 import java.util.List;
@@ -19,14 +19,14 @@ public interface IShiro {
      *
      * @param account 账号
      */
-    User user(String account);
+    SysUser user(String account);
 
     /**
      * 根据系统用户获取Shiro的用户
      *
      * @param user 系统用户
      */
-    ShiroUser shiroUser(User user);
+    ShiroUser shiroUser(SysUser user);
 
     /**
      * 获取权限列表通过角色id
@@ -45,6 +45,6 @@ public interface IShiro {
     /**
      * 获取shiro的认证信息
      */
-    SimpleAuthenticationInfo info(ShiroUser shiroUser, User user, String realmName);
+    SimpleAuthenticationInfo info(ShiroUser shiroUser, SysUser user, String realmName);
 
 }

@@ -15,8 +15,8 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.Role;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysRole;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import com.stylefeng.guns.modular.system.service.IRoleService;
 import com.stylefeng.guns.modular.system.service.IUserService;
 import com.stylefeng.guns.modular.system.warpper.RoleWarpper;
@@ -76,7 +76,7 @@ public class RoleController extends BaseController {
         if (ToolUtil.isEmpty(roleId)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        Role role = this.roleService.selectById(roleId);
+        SysRole role = this.roleService.selectById(roleId);
         model.addAttribute(role);
         model.addAttribute("pName", ConstantFactory.me().getSingleRoleName(role.getPid()));
         model.addAttribute("deptName", ConstantFactory.me().getDeptName(role.getDeptid()));
@@ -116,7 +116,7 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "添加角色", key = "name", dict = RoleDict.class)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip add(@Valid Role role, BindingResult result) {
+    public Tip add(@Valid SysRole role, BindingResult result) {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -132,7 +132,7 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "修改角色", key = "name", dict = RoleDict.class)
     @Permission(Const.ADMIN_NAME)
     @ResponseBody
-    public Tip edit(@Valid Role role, BindingResult result) {
+    public Tip edit(@Valid SysRole role, BindingResult result) {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -215,7 +215,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/roleTreeListByUserId/{userId}")
     @ResponseBody
     public List<ZTreeNode> roleTreeListByUserId(@PathVariable Integer userId) {
-        User theUser = this.userService.selectById(userId);
+        SysUser theUser = this.userService.selectById(userId);
         String roleid = theUser.getRoleid();
         if (ToolUtil.isEmpty(roleid)) {
             List<ZTreeNode> roleTreeList = this.roleService.roleTreeList();

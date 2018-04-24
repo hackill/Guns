@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.core.exception.GunsException;
-import com.stylefeng.guns.modular.system.dao.DictMapper;
-import com.stylefeng.guns.modular.system.model.Dict;
+import com.stylefeng.guns.modular.system.dao.SysDictMapper;
+import com.stylefeng.guns.modular.system.model.SysDict;
 import com.stylefeng.guns.modular.system.service.IDictService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +19,15 @@ import static com.stylefeng.guns.core.common.constant.factory.MutiStrFactory.*;
 
 @Service
 @Transactional
-public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements IDictService {
+public class DictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> implements IDictService {
 
     @Resource
-    private DictMapper dictMapper;
+    private SysDictMapper dictMapper;
 
     @Override
     public void addDict(String dictName, String dictValues) {
         //判断有没有该字典
-        List<Dict> dicts = dictMapper.selectList(new EntityWrapper<Dict>().eq("name", dictName).and().eq("pid", 0));
+        List<SysDict> dicts = dictMapper.selectList(new EntityWrapper<SysDict>().eq("name", dictName).and().eq("pid", 0));
         if (dicts != null && dicts.size() > 0) {
             throw new GunsException(BizExceptionEnum.DICT_EXISTED);
         }
@@ -36,7 +36,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         List<Map<String, String>> items = parseKeyValue(dictValues);
 
         //添加字典
-        Dict dict = new Dict();
+        SysDict dict = new SysDict();
         dict.setName(dictName);
         dict.setNum(0);
         dict.setPid(0);
@@ -46,7 +46,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
         for (Map<String, String> item : items) {
             String num = item.get(MUTI_STR_KEY);
             String name = item.get(MUTI_STR_VALUE);
-            Dict itemDict = new Dict();
+            SysDict itemDict = new SysDict();
             itemDict.setPid(dict.getId());
             itemDict.setName(name);
             try {
@@ -70,7 +70,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     @Override
     public void delteDict(Integer dictId) {
         //删除这个字典的子词典
-        Wrapper<Dict> dictEntityWrapper = new EntityWrapper<>();
+        Wrapper<SysDict> dictEntityWrapper = new EntityWrapper<>();
         dictEntityWrapper = dictEntityWrapper.eq("pid", dictId);
         dictMapper.delete(dictEntityWrapper);
 
@@ -79,7 +79,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements ID
     }
 
     @Override
-    public List<Dict> selectByCode(String code) {
+    public List<SysDict> selectByCode(String code) {
         return this.baseMapper.selectByCode(code);
     }
 

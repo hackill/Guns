@@ -1,6 +1,6 @@
 package com.stylefeng.guns.core.common.constant.factory;
 
-import com.stylefeng.guns.modular.system.model.Dict;
+import com.stylefeng.guns.modular.system.model.SysDict;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ public interface IConstantFactory {
     /**
      * 查询字典
      */
-    List<Dict> findInDict(Integer id);
+    List<SysDict> findInDict(Integer id);
 
     /**
      * 获取被缓存的对象(用户删除业务)

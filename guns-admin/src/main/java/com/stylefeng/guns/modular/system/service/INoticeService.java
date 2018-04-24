@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.stylefeng.guns.modular.system.model.Notice;
+import com.stylefeng.guns.modular.system.model.SysNotice;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author stylefeng123
  * @since 2018-02-22
  */
-public interface INoticeService extends IService<Notice> {
+public interface INoticeService extends IService<SysNotice> {
 
     /**
      * 获取通知列表

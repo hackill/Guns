@@ -9,7 +9,7 @@ import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.Notice;
+import com.stylefeng.guns.modular.system.model.SysNotice;
 import com.stylefeng.guns.modular.system.service.INoticeService;
 import com.stylefeng.guns.modular.system.warpper.NoticeWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +60,7 @@ public class NoticeController extends BaseController {
      */
     @RequestMapping("/notice_update/{noticeId}")
     public String noticeUpdate(@PathVariable Integer noticeId, Model model) {
-        Notice notice = this.noticeService.selectById(noticeId);
+        SysNotice notice = this.noticeService.selectById(noticeId);
         model.addAttribute("notice",notice);
         LogObjectHolder.me().set(notice);
         return PREFIX + "notice_edit.html";
@@ -92,7 +92,7 @@ public class NoticeController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     @BussinessLog(value = "新增通知",key = "title",dict = NoticeMap.class)
-    public Object add(Notice notice) {
+    public Object add(SysNotice notice) {
         if (ToolUtil.isOneEmpty(notice, notice.getTitle(), notice.getContent())) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -124,11 +124,11 @@ public class NoticeController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     @BussinessLog(value = "修改通知",key = "title",dict = NoticeMap.class)
-    public Object update(Notice notice) {
+    public Object update(SysNotice notice) {
         if (ToolUtil.isOneEmpty(notice, notice.getId(), notice.getTitle(), notice.getContent())) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        Notice old = this.noticeService.selectById(notice.getId());
+        SysNotice old = this.noticeService.selectById(notice.getId());
         old.setTitle(notice.getTitle());
         old.setContent(notice.getContent());
         old.updateById();

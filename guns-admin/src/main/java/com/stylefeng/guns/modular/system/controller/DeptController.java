@@ -10,7 +10,7 @@ import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.Dept;
+import com.stylefeng.guns.modular.system.model.SysDept;
 import com.stylefeng.guns.modular.system.service.IDeptService;
 import com.stylefeng.guns.modular.system.warpper.DeptWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +61,7 @@ public class DeptController extends BaseController {
     @Permission
     @RequestMapping("/dept_update/{deptId}")
     public String deptUpdate(@PathVariable Integer deptId, Model model) {
-        Dept dept = deptService.selectById(deptId);
+        SysDept dept = deptService.selectById(deptId);
         model.addAttribute(dept);
         model.addAttribute("pName", ConstantFactory.me().getDeptName(dept.getPid()));
         LogObjectHolder.me().set(dept);
@@ -86,7 +86,7 @@ public class DeptController extends BaseController {
     @RequestMapping(value = "/add")
     @Permission
     @ResponseBody
-    public Object add(Dept dept) {
+    public Object add(SysDept dept) {
         if (ToolUtil.isOneEmpty(dept, dept.getSimplename())) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -123,7 +123,7 @@ public class DeptController extends BaseController {
     @RequestMapping(value = "/update")
     @Permission
     @ResponseBody
-    public Object update(Dept dept) {
+    public Object update(SysDept dept) {
         if (ToolUtil.isEmpty(dept) || dept.getId() == null) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -149,13 +149,13 @@ public class DeptController extends BaseController {
         return SUCCESS_TIP;
     }
 
-    private void deptSetPids(Dept dept) {
+    private void deptSetPids(SysDept dept) {
         if (ToolUtil.isEmpty(dept.getPid()) || dept.getPid().equals(0)) {
             dept.setPid(0);
             dept.setPids("[0],");
         } else {
             int pid = dept.getPid();
-            Dept temp = deptService.selectById(pid);
+            SysDept temp = deptService.selectById(pid);
             String pids = temp.getPids();
             dept.setPid(pid);
             dept.setPids(pids + "[" + pid + "],");

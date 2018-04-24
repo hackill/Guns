@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.stylefeng.guns.modular.system.model.Relation;
+import com.stylefeng.guns.modular.system.model.SysRelation;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.stylefeng.guns.modular.system.model.Relation;
  * @author stylefeng123
  * @since 2018-02-22
  */
-public interface IRelationService extends IService<Relation> {
+public interface IRelationService extends IService<SysRelation> {
 
 }

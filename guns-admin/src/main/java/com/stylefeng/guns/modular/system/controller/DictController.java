@@ -11,7 +11,7 @@ import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.Dict;
+import com.stylefeng.guns.modular.system.model.SysDict;
 import com.stylefeng.guns.modular.system.service.IDictService;
 import com.stylefeng.guns.modular.system.warpper.DictWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +62,9 @@ public class DictController extends BaseController {
     @Permission(Const.ADMIN_NAME)
     @RequestMapping("/dict_edit/{dictId}")
     public String deptUpdate(@PathVariable Integer dictId, Model model) {
-        Dict dict = dictService.selectById(dictId);
+        SysDict dict = dictService.selectById(dictId);
         model.addAttribute("dict", dict);
-        List<Dict> subDicts = dictService.selectList(new EntityWrapper<Dict>().eq("pid", dictId));
+        List<SysDict> subDicts = dictService.selectList(new EntityWrapper<SysDict>().eq("pid", dictId));
         model.addAttribute("subDicts", subDicts);
         LogObjectHolder.me().set(dict);
         return PREFIX + "dict_edit.html";

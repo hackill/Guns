@@ -2,7 +2,7 @@ package com.stylefeng.guns.modular.system.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.core.node.ZTreeNode;
-import com.stylefeng.guns.modular.system.model.Role;
+import com.stylefeng.guns.modular.system.model.SysRole;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author fengshuonan
  * @Date 2017年1月10日 下午9:11:57
  */
-public interface IRoleService extends IService<Role> {
+public interface IRoleService extends IService<SysRole> {
 
     /**
      * 设置某个角色的权限

@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.node.ZTreeNode;
-import com.stylefeng.guns.modular.system.dao.DeptMapper;
-import com.stylefeng.guns.modular.system.model.Dept;
+import com.stylefeng.guns.modular.system.dao.SysDeptMapper;
+import com.stylefeng.guns.modular.system.model.SysDept;
 import com.stylefeng.guns.modular.system.service.IDeptService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +16,19 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements IDeptService {
+public class DeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements IDeptService {
 
     @Resource
-    private DeptMapper deptMapper;
+    private SysDeptMapper deptMapper;
 
     @Override
     public void deleteDept(Integer deptId) {
-        Dept dept = deptMapper.selectById(deptId);
+        SysDept dept = deptMapper.selectById(deptId);
 
-        Wrapper<Dept> wrapper = new EntityWrapper<>();
+        Wrapper<SysDept> wrapper = new EntityWrapper<>();
         wrapper = wrapper.like("pids", "%[" + dept.getId() + "]%");
-        List<Dept> subDepts = deptMapper.selectList(wrapper);
-        for (Dept temp : subDepts) {
+        List<SysDept> subDepts = deptMapper.selectList(wrapper);
+        for (SysDept temp : subDepts) {
             temp.deleteById();
         }
 

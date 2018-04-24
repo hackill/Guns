@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.system.factory;
 
 import com.stylefeng.guns.modular.system.transfer.UserDto;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import org.springframework.beans.BeanUtils;
 
 /**
@@ -12,11 +12,11 @@ import org.springframework.beans.BeanUtils;
  */
 public class UserFactory {
 
-    public static User createUser(UserDto userDto){
+    public static SysUser createUser(UserDto userDto){
         if(userDto == null){
             return null;
         }else{
-            User user = new User();
+            SysUser user = new SysUser();
             BeanUtils.copyProperties(userDto,user);
             return user;
         }

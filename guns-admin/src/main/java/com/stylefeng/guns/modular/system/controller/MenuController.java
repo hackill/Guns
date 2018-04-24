@@ -15,7 +15,7 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.node.ZTreeNode;
 import com.stylefeng.guns.core.support.BeanKit;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.Menu;
+import com.stylefeng.guns.modular.system.model.SysMenu;
 import com.stylefeng.guns.modular.system.service.IMenuService;
 import com.stylefeng.guns.modular.system.warpper.MenuWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,12 +71,12 @@ public class MenuController extends BaseController {
         if (ToolUtil.isEmpty(menuId)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        Menu menu = this.menuService.selectById(menuId);
+        SysMenu menu = this.menuService.selectById(menuId);
 
         //获取父级菜单的id
-        Menu temp = new Menu();
+        SysMenu temp = new SysMenu();
         temp.setCode(menu.getPcode());
-        Menu pMenu = this.menuService.selectOne(new EntityWrapper<>(temp));
+        SysMenu pMenu = this.menuService.selectOne(new EntityWrapper<>(temp));
 
         //如果父级是顶级菜单
         if (pMenu == null) {
@@ -100,7 +100,7 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/edit")
     @BussinessLog(value = "修改菜单", key = "name", dict = MenuDict.class)
     @ResponseBody
-    public Tip edit(@Valid Menu menu, BindingResult result) {
+    public Tip edit(@Valid SysMenu menu, BindingResult result) {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -129,7 +129,7 @@ public class MenuController extends BaseController {
     @RequestMapping(value = "/add")
     @BussinessLog(value = "菜单新增", key = "name", dict = MenuDict.class)
     @ResponseBody
-    public Tip add(@Valid Menu menu, BindingResult result) {
+    public Tip add(@Valid SysMenu menu, BindingResult result) {
         if (result.hasErrors()) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -220,14 +220,14 @@ public class MenuController extends BaseController {
     /**
      * 根据请求的父级菜单编号设置pcode和层级
      */
-    private void menuSetPcode(@Valid Menu menu) {
+    private void menuSetPcode(@Valid SysMenu menu) {
         if (ToolUtil.isEmpty(menu.getPcode()) || menu.getPcode().equals("0")) {
             menu.setPcode("0");
             menu.setPcodes("[0],");
             menu.setLevels(1);
         } else {
             long code = Long.parseLong(menu.getPcode());
-            Menu pMenu = menuService.selectById(code);
+            SysMenu pMenu = menuService.selectById(code);
             Integer pLevels = pMenu.getLevels();
             menu.setPcode(pMenu.getCode());
 

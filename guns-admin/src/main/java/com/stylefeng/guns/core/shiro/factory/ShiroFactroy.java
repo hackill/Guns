@@ -5,9 +5,9 @@ import com.stylefeng.guns.core.common.constant.state.ManagerStatus;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.Convert;
 import com.stylefeng.guns.core.util.SpringContextHolder;
-import com.stylefeng.guns.modular.system.dao.MenuMapper;
-import com.stylefeng.guns.modular.system.dao.UserMapper;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.dao.SysMenuMapper;
+import com.stylefeng.guns.modular.system.dao.SysUserMapper;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -27,19 +27,19 @@ import java.util.List;
 public class ShiroFactroy implements IShiro {
 
     @Autowired
-    private UserMapper userMapper;
+    private SysUserMapper userMapper;
 
     @Autowired
-    private MenuMapper menuMapper;
+    private SysMenuMapper menuMapper;
 
     public static IShiro me() {
         return SpringContextHolder.getBean(IShiro.class);
     }
 
     @Override
-    public User user(String account) {
+    public SysUser user(String account) {
 
-        User user = userMapper.getByAccount(account);
+        SysUser user = userMapper.getByAccount(account);
 
         // 账号不存在
         if (null == user) {
@@ -53,7 +53,7 @@ public class ShiroFactroy implements IShiro {
     }
 
     @Override
-    public ShiroUser shiroUser(User user) {
+    public ShiroUser shiroUser(SysUser user) {
         ShiroUser shiroUser = new ShiroUser();
 
         shiroUser.setId(user.getId());
@@ -86,7 +86,7 @@ public class ShiroFactroy implements IShiro {
     }
 
     @Override
-    public SimpleAuthenticationInfo info(ShiroUser shiroUser, User user, String realmName) {
+    public SimpleAuthenticationInfo info(ShiroUser shiroUser, SysUser user, String realmName) {
         String credentials = user.getPassword();
 
         // 密码加盐处理

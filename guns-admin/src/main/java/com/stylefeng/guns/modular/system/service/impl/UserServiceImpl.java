@@ -2,8 +2,8 @@ package com.stylefeng.guns.modular.system.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.core.datascope.DataScope;
-import com.stylefeng.guns.modular.system.dao.UserMapper;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.dao.SysUserMapper;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import com.stylefeng.guns.modular.system.service.IUserService;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.Map;
  * @since 2018-02-22
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements IUserService {
 
     @Override
     public int setStatus(Integer userId, int status) {
@@ -42,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User getByAccount(String account) {
+    public SysUser getByAccount(String account) {
         return this.baseMapper.getByAccount(account);
     }
 }

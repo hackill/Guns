@@ -26,15 +26,15 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     protected void dataSourceConfig() {
         dataSourceConfig.setDbType(DbType.MYSQL);
         dataSourceConfig.setDriverName("com.mysql.jdbc.Driver");
-        dataSourceConfig.setUsername("root");
-        dataSourceConfig.setPassword("123456");
+        dataSourceConfig.setUsername("bonguser");
+        dataSourceConfig.setPassword("bongtest");
         dataSourceConfig.setUrl("jdbc:mysql://121.199.26.46:3306/gear?characterEncoding=utf8");
     }
 
     protected void strategyConfig() {
         //// 此处可以修改为您的表前缀 自动过滤前缀
-        strategyConfig.setTablePrefix(new String[]{"sys_"});
-        strategyConfig.setInclude(new String[]{"my_order"});
+//        strategyConfig.setTablePrefix(new String[]{""});
+//        strategyConfig.setInclude(new String[]{""});
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
     }
 

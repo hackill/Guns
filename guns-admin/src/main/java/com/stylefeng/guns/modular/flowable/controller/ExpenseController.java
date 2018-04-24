@@ -1,7 +1,7 @@
 package com.stylefeng.guns.modular.flowable.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.stylefeng.guns.modular.system.model.Expense;
+import com.stylefeng.guns.modular.system.model.SysExpense;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.modular.flowable.service.IExpenseService;
@@ -66,7 +66,7 @@ public class ExpenseController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        EntityWrapper<Expense> expenseEntityWrapper = new EntityWrapper<>();
+        EntityWrapper<SysExpense> expenseEntityWrapper = new EntityWrapper<>();
         expenseEntityWrapper.eq("userid", ShiroKit.getUser().getId());
         List<Map<String, Object>> stringObjectMap = expenseService.selectMaps(expenseEntityWrapper);
         return super.warpObject(new ExpenseWarpper(stringObjectMap));
@@ -77,7 +77,7 @@ public class ExpenseController extends BaseController {
      */
     @RequestMapping(value = "/add")
     @ResponseBody
-    public Object add(Expense expense) {
+    public Object add(SysExpense expense) {
         expenseService.add(expense);
         return SUCCESS_TIP;
     }
@@ -97,7 +97,7 @@ public class ExpenseController extends BaseController {
      */
     @RequestMapping(value = "/update")
     @ResponseBody
-    public Object update(Expense expense) {
+    public Object update(SysExpense expense) {
         expenseService.updateById(expense);
         return SUCCESS_TIP;
     }

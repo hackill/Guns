@@ -1,7 +1,7 @@
 package com.stylefeng.guns.system;
 
 import com.stylefeng.guns.base.BaseJunit;
-import com.stylefeng.guns.modular.system.dao.DictMapper;
+import com.stylefeng.guns.modular.system.dao.SysDictMapper;
 import com.stylefeng.guns.modular.system.service.IDictService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class DictTest extends BaseJunit {
     IDictService dictService;
 
     @Resource
-    DictMapper dictMapper;
+    SysDictMapper dictMapper;
 
     @Test
     public void addTest() {

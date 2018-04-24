@@ -1,8 +1,8 @@
 package com.stylefeng.guns.system;
 
 import com.stylefeng.guns.base.BaseJunit;
-import com.stylefeng.guns.modular.system.dao.DeptMapper;
-import com.stylefeng.guns.modular.system.model.Dept;
+import com.stylefeng.guns.modular.system.dao.SysDeptMapper;
+import com.stylefeng.guns.modular.system.model.SysDept;
 import org.junit.Test;
 
 import javax.annotation.Resource;
@@ -21,11 +21,11 @@ import static org.junit.Assert.assertTrue;
 public class DeptTest extends BaseJunit {
 
     @Resource
-    DeptMapper deptMapper;
+    SysDeptMapper deptMapper;
 
     @Test
     public void addDeptTest() {
-        Dept dept = new Dept();
+        SysDept dept = new SysDept();
         dept.setFullname("测试fullname");
         dept.setNum(5);
         dept.setPid(1);
@@ -38,7 +38,7 @@ public class DeptTest extends BaseJunit {
 
     @Test
     public void updateTest() {
-        Dept dept = this.deptMapper.selectById(24);
+        SysDept dept = this.deptMapper.selectById(24);
         dept.setTips("哈哈");
         boolean flag = dept.updateById();
         assertTrue(flag);
@@ -46,7 +46,7 @@ public class DeptTest extends BaseJunit {
 
     @Test
     public void deleteTest() {
-        Dept dept = this.deptMapper.selectById(24);
+        SysDept dept = this.deptMapper.selectById(24);
         Integer integer = deptMapper.deleteById(dept);
         assertTrue(integer > 0);
     }

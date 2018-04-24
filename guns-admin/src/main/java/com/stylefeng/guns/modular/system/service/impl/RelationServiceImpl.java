@@ -1,8 +1,8 @@
 package com.stylefeng.guns.modular.system.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.stylefeng.guns.modular.system.dao.RelationMapper;
-import com.stylefeng.guns.modular.system.model.Relation;
+import com.stylefeng.guns.modular.system.dao.SysRelationMapper;
+import com.stylefeng.guns.modular.system.model.SysRelation;
 import com.stylefeng.guns.modular.system.service.IRelationService;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2018-02-22
  */
 @Service
-public class RelationServiceImpl extends ServiceImpl<RelationMapper, Relation> implements IRelationService {
+public class RelationServiceImpl extends ServiceImpl<SysRelationMapper, SysRelation> implements IRelationService {
 
 }

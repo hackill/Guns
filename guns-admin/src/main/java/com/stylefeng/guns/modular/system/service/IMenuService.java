@@ -3,7 +3,7 @@ package com.stylefeng.guns.modular.system.service;
 import com.baomidou.mybatisplus.service.IService;
 import com.stylefeng.guns.core.node.MenuNode;
 import com.stylefeng.guns.core.node.ZTreeNode;
-import com.stylefeng.guns.modular.system.model.Menu;
+import com.stylefeng.guns.modular.system.model.SysMenu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author fengshuonan
  * @date 2017-05-05 22:19
  */
-public interface IMenuService extends IService<Menu> {
+public interface IMenuService extends IService<SysMenu> {
 
     /**
      * 删除菜单

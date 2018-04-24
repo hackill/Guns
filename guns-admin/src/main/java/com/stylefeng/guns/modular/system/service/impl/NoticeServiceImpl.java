@@ -1,8 +1,8 @@
 package com.stylefeng.guns.modular.system.service.impl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.stylefeng.guns.modular.system.dao.NoticeMapper;
-import com.stylefeng.guns.modular.system.model.Notice;
+import com.stylefeng.guns.modular.system.dao.SysNoticeMapper;
+import com.stylefeng.guns.modular.system.model.SysNotice;
 import com.stylefeng.guns.modular.system.service.INoticeService;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.Map;
  * @since 2018-02-22
  */
 @Service
-public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> implements INoticeService {
+public class NoticeServiceImpl extends ServiceImpl<SysNoticeMapper, SysNotice> implements INoticeService {
 
     @Override
     public List<Map<String, Object>> list(String condition) {

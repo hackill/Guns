@@ -17,9 +17,9 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.dao.UserMapper;
+import com.stylefeng.guns.modular.system.dao.SysUserMapper;
 import com.stylefeng.guns.modular.system.factory.UserFactory;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import com.stylefeng.guns.modular.system.service.IUserService;
 import com.stylefeng.guns.modular.system.transfer.UserDto;
 import com.stylefeng.guns.modular.system.warpper.UserWarpper;
@@ -82,7 +82,7 @@ public class UserMgrController extends BaseController {
         if (ToolUtil.isEmpty(userId)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        User user = (User) Db.create(UserMapper.class).selectOneByCon("id", userId);
+        SysUser user = (SysUser) Db.create(SysUserMapper.class).selectOneByCon("id", userId);
         model.addAttribute("userId", userId);
         model.addAttribute("userAccount", user.getAccount());
         return PREFIX + "user_roleassign.html";
@@ -98,7 +98,7 @@ public class UserMgrController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         assertAuth(userId);
-        User user = this.userService.selectById(userId);
+        SysUser user = this.userService.selectById(userId);
         model.addAttribute(user);
         model.addAttribute("roleName", ConstantFactory.me().getRoleName(user.getRoleid()));
         model.addAttribute("deptName", ConstantFactory.me().getDeptName(user.getDeptid()));
@@ -115,7 +115,7 @@ public class UserMgrController extends BaseController {
         if (ToolUtil.isEmpty(userId)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
-        User user = this.userService.selectById(userId);
+        SysUser user = this.userService.selectById(userId);
         model.addAttribute(user);
         model.addAttribute("roleName", ConstantFactory.me().getRoleName(user.getRoleid()));
         model.addAttribute("deptName", ConstantFactory.me().getDeptName(user.getDeptid()));
@@ -141,7 +141,7 @@ public class UserMgrController extends BaseController {
             throw new GunsException(BizExceptionEnum.TWO_PWD_NOT_MATCH);
         }
         Integer userId = ShiroKit.getUser().getId();
-        User user = userService.selectById(userId);
+        SysUser user = userService.selectById(userId);
         String oldMd5 = ShiroKit.md5(oldPwd, user.getSalt());
         if (user.getPassword().equals(oldMd5)) {
             String newMd5 = ShiroKit.md5(newPwd, user.getSalt());
@@ -183,7 +183,7 @@ public class UserMgrController extends BaseController {
         }
 
         // 判断账号是否重复
-        User theUser = userService.getByAccount(user.getAccount());
+        SysUser theUser = userService.getByAccount(user.getAccount());
         if (theUser != null) {
             throw new GunsException(BizExceptionEnum.USER_ALREADY_REG);
         }
@@ -250,7 +250,7 @@ public class UserMgrController extends BaseController {
      */
     @RequestMapping("/view/{userId}")
     @ResponseBody
-    public User view(@PathVariable Integer userId) {
+    public SysUser view(@PathVariable Integer userId) {
         if (ToolUtil.isEmpty(userId)) {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -270,7 +270,7 @@ public class UserMgrController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         assertAuth(userId);
-        User user = this.userService.selectById(userId);
+        SysUser user = this.userService.selectById(userId);
         user.setSalt(ShiroKit.getRandomSalt(5));
         user.setPassword(ShiroKit.md5(Const.DEFAULT_PWD, user.getSalt()));
         this.userService.updateById(user);
@@ -357,7 +357,7 @@ public class UserMgrController extends BaseController {
             return;
         }
         List<Integer> deptDataScope = ShiroKit.getDeptDataScope();
-        User user = this.userService.selectById(userId);
+        SysUser user = this.userService.selectById(userId);
         Integer deptid = user.getDeptid();
         if (deptDataScope.contains(deptid)) {
             return;

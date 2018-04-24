@@ -11,7 +11,7 @@ import com.stylefeng.guns.core.shiro.ShiroUser;
 import com.stylefeng.guns.core.util.ApiMenuFilter;
 import com.stylefeng.guns.core.util.KaptchaUtil;
 import com.stylefeng.guns.core.util.ToolUtil;
-import com.stylefeng.guns.modular.system.model.User;
+import com.stylefeng.guns.modular.system.model.SysUser;
 import com.stylefeng.guns.modular.system.service.IMenuService;
 import com.stylefeng.guns.modular.system.service.IUserService;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -61,7 +61,7 @@ public class LoginController extends BaseController {
 
         //获取用户头像
         Integer id = ShiroKit.getUser().getId();
-        User user = userService.selectById(id);
+        SysUser user = userService.selectById(id);
         String avatar = user.getAvatar();
         model.addAttribute("avatar", avatar);
 
