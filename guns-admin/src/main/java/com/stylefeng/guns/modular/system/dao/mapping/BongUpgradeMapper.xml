@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.BongUpgradeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.BongUpgrade">
+        <id column="id" property="id" />
+        <result column="product" property="product" />
+        <result column="ver" property="ver" />
+        <result column="crc" property="crc" />
+        <result column="file_length" property="fileLength" />
+        <result column="file_name" property="fileName" />
+        <result column="comment" property="comment" />
+        <result column="recover" property="recover" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product, ver, crc, file_length AS fileLength, file_name AS fileName, comment, recover, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+
+</mapper>

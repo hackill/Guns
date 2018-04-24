@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.GatewayInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.GatewayInfo">
+        <id column="id" property="id" />
+        <result column="gateway_mac" property="gatewayMac" />
+        <result column="type" property="type" />
+        <result column="comment" property="comment" />
+        <result column="status" property="status" />
+        <result column="sync_interval" property="syncInterval" />
+        <result column="scan_interval" property="scanInterval" />
+        <result column="update_interval" property="updateInterval" />
+        <result column="version" property="version" />
+        <result column="group_id" property="groupId" />
+        <result column="inst_id" property="instId" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, gateway_mac AS gatewayMac, type, comment, status, sync_interval AS syncInterval, scan_interval AS scanInterval, update_interval AS updateInterval, version, group_id AS groupId, inst_id AS instId, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+
+</mapper>

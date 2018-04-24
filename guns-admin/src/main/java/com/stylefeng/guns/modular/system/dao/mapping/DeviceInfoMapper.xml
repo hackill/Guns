@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.DeviceInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.DeviceInfo">
+        <id column="id" property="id" />
+        <result column="bong_mac" property="bongMac" />
+        <result column="nfc_code" property="nfcCode" />
+        <result column="user_id" property="userId" />
+        <result column="group_id" property="groupId" />
+        <result column="gateway_id" property="gatewayId" />
+        <result column="inst_id" property="instId" />
+        <result column="comment" property="comment" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, bong_mac AS bongMac, nfc_code AS nfcCode, user_id AS userId, group_id AS groupId, gateway_id AS gatewayId, inst_id AS instId, comment, status, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+
+</mapper>
