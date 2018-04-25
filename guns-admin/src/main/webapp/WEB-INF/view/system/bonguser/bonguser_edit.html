@@ -1,0 +1,41 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="id" value="${item.id}">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="主键" value="${item.id}" underline="true"/>
+                            <#input id="code" name="用户编号" value="${item.code}" underline="true"/>
+                            <#input id="name" name="用户姓名" value="${item.name}" underline="true"/>
+                            <#input id="gender" name="0:male;1:female;2:others" value="${item.gender}" underline="true"/>
+                            <#input id="birthday" name="出生年" value="${item.birthday}" underline="true"/>
+                            <#input id="height" name="出生年" value="${item.height}" underline="true"/>
+                            <#input id="phoneNumber" name="电话号码" value="${item.phoneNumber}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="type" name="用户类型 暂无用途" value="${item.type}" underline="true"/>
+                            <#input id="comment" name="备注" value="${item.comment}" underline="true"/>
+                            <#input id="status" name="0：正常" value="${item.status}" underline="true"/>
+                            <#input id="groupId" name="groupId" value="${item.groupId}" underline="true"/>
+                            <#input id="instId" name="institutionId 机构Id" value="${item.instId}" underline="true"/>
+                            <#input id="createTime" name="" value="${item.createTime}" underline="true"/>
+                            <#input id="modifyTime" name="" value="${item.modifyTime}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BonguserInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BonguserInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/bonguser/bonguser_info.js"></script>
+@}
