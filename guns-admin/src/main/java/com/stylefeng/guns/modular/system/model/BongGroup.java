@@ -16,7 +16,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author hackill123
- * @since 2018-04-24
+ * @since 2018-04-25
  */
 @TableName("bong_group")
 public class BongGroup extends Model<BongGroup> {

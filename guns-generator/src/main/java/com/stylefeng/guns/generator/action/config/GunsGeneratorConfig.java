@@ -34,7 +34,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     protected void strategyConfig() {
         //// 此处可以修改为您的表前缀 自动过滤前缀
 //        strategyConfig.setTablePrefix(new String[]{""});
-        strategyConfig.setInclude(new String[]{"user"});
+        strategyConfig.setInclude(new String[]{"bong_group"});
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
     }
 
@@ -58,11 +58,11 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
 
         contextConfig.setProPackage("com.stylefeng.guns");
 //        contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
-        contextConfig.setBizChName("用户");
-        contextConfig.setBizEnName("bonguser");
+        contextConfig.setBizChName("群主");
+        contextConfig.setBizEnName("bonggroup");
         contextConfig.setModuleName("system");
         contextConfig.setProjectPath("/Users/hackill/IntellijProjects/Guns/guns-admin");//写自己项目的绝对路径
-        contextConfig.setEntityName("User");
+        contextConfig.setEntityName("BongGroup");
 
         sqlConfig.setParentMenuName(null);//这里写已有菜单的名称,当做父节点
 
