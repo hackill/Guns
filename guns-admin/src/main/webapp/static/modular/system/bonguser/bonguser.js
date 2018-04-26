@@ -14,20 +14,33 @@ var Bonguser = {
 Bonguser.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户编号', field: 'code', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
-            {title: '0:male;1:female;2:others', field: 'gender', visible: true, align: 'center', valign: 'middle'},
-            {title: '出生年', field: 'birthday', visible: true, align: 'center', valign: 'middle'},
-            {title: '出生年', field: 'height', visible: true, align: 'center', valign: 'middle'},
-            {title: '电话号码', field: 'phoneNumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '用户类型 暂无用途', field: 'type', visible: true, align: 'center', valign: 'middle'},
-            {title: '备注', field: 'comment', visible: true, align: 'center', valign: 'middle'},
-            {title: '0：正常', field: 'status', visible: true, align: 'center', valign: 'middle'},
-            {title: 'groupId', field: 'groupId', visible: true, align: 'center', valign: 'middle'},
-            {title: 'institutionId 机构Id', field: 'instId', visible: true, align: 'center', valign: 'middle'},
-            {title: '', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
-            {title: '', field: 'modifyTime', visible: true, align: 'center', valign: 'middle'}
+        {title: '主键', field: 'id', visible: false, align: 'center', valign: 'middle'},
+        {title: '用户编号', field: 'code', visible: true, align: 'center', valign: 'middle'},
+        {title: '姓名', field: 'name', visible: false, align: 'center', valign: 'middle'},
+        {title: '电话号码', field: 'phoneNumber', visible: true, align: 'center', valign: 'middle'},
+        {title: '性别', field: 'gender', visible: true, align: 'center', valign: 'middle'},
+        {title: '出生年', field: 'birthday', visible: true, align: 'center', valign: 'middle'},
+        {title: '身高', field: 'height', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户类型', field: 'type', visible: false, align: 'center', valign: 'middle'},
+        {title: '备注', field: 'comment', visible: true, align: 'center', valign: 'middle'},
+        {
+            title: '状态',
+            field: 'status',
+            visible: true,
+            align: 'center',
+            valign: 'middle',
+            formatter: function (value, row, index) {
+                if (row['status'] === 0) {
+                    return "正常";
+                } else {
+                    return "禁用";
+                }
+            }
+        },
+        {title: 'groupId', field: 'groupId', visible: true, align: 'center', valign: 'middle'},
+        {title: '机构Id', field: 'instId', visible: true, align: 'center', valign: 'middle'},
+        {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
+        {title: '修改时间', field: 'modifyTime', visible: false, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -36,10 +49,10 @@ Bonguser.initColumn = function () {
  */
 Bonguser.check = function () {
     var selected = $('#' + this.id).bootstrapTable('getSelections');
-    if(selected.length == 0){
+    if (selected.length == 0) {
         Feng.info("请先选中表格中的某一记录！");
         return false;
-    }else{
+    } else {
         Bonguser.seItem = selected[0];
         return true;
     }
@@ -88,7 +101,7 @@ Bonguser.delete = function () {
         }, function (data) {
             Feng.error("删除失败!" + data.responseJSON.message + "!");
         });
-        ajax.set("bonguserId",this.seItem.id);
+        ajax.set("bonguserId", this.seItem.id);
         ajax.start();
     }
 };
@@ -108,3 +121,13 @@ $(function () {
     table.setPaginationType("client");
     Bonguser.table = table.init();
 });
+
+// function test(value, row, index) {
+//         // alert(value + ", " + row['status'] + ", " + index);
+//
+//     // return row['status'];
+//         return [
+//             '<\#button name="添加" icon="fa-plus" clickFun="Bonguser.openAddBonguser()"/> '
+//         ].join('');
+//
+// }
