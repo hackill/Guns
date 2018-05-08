@@ -1,9 +1,14 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.common.constant.factory.PageFactory;
+import com.stylefeng.guns.core.common.constant.state.BizLogType;
 import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.modular.system.model.SysOperationLog;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IBongUserService;
+import com.stylefeng.guns.modular.system.warpper.LogWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户控制器
@@ -50,7 +58,15 @@ public class BongUserController extends BaseController {
     public String bonguserUpdate(@PathVariable Integer bonguserId, Model model) {
         User bonguser = bonguserService.selectById(bonguserId);
         model.addAttribute("item", bonguser);
-        LogObjectHolder.me().set(bonguser);
+        LogObjectHolder.me().set(bonguser);asdf
+
+
+        Page<SysOperationLog> page = new PageFactory<SysOperationLog>().defaultPage();
+//        List<Map<String, Object>> result = operationLogService.getOperationLogs(page, beginTime, endTime, logName, BizLogType.valueOf(logType), page.getOrderByField(), page.isAsc());
+//        page.setRecords((List<SysOperationLog>) new LogWarpper(result).warp());
+//        return super.packForBT(page);
+
+
         return PREFIX + "bonguser_edit.html";
     }
 
@@ -59,7 +75,22 @@ public class BongUserController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(@RequestParam(required = false) String condition) {
+
+        Page<User> page = new PageFactory<User>().defaultPage();
+
+//        Wrapper<User> wrapper = new Wrapper<User>() {
+//            @Override
+//            public String getSqlSegment() {
+//                return null;
+//            }
+//        };
+
+
+
+
+        List<Map<String, Object>> result = bonguserService.selectMaps(null);
+
         return bonguserService.selectList(null);
     }
 
