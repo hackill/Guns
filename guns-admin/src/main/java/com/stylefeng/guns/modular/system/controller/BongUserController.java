@@ -3,12 +3,10 @@ package com.stylefeng.guns.modular.system.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.constant.factory.PageFactory;
-import com.stylefeng.guns.core.common.constant.state.BizLogType;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.modular.system.model.SysOperationLog;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IBongUserService;
-import com.stylefeng.guns.modular.system.warpper.LogWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +56,7 @@ public class BongUserController extends BaseController {
     public String bonguserUpdate(@PathVariable Integer bonguserId, Model model) {
         User bonguser = bonguserService.selectById(bonguserId);
         model.addAttribute("item", bonguser);
-        LogObjectHolder.me().set(bonguser);asdf
+        LogObjectHolder.me().set(bonguser);
 
 
         Page<SysOperationLog> page = new PageFactory<SysOperationLog>().defaultPage();
@@ -85,8 +83,6 @@ public class BongUserController extends BaseController {
 //                return null;
 //            }
 //        };
-
-
 
 
         List<Map<String, Object>> result = bonguserService.selectMaps(null);

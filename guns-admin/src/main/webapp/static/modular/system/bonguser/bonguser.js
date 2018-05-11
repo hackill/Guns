@@ -29,13 +29,7 @@ Bonguser.initColumn = function () {
             visible: true,
             align: 'center',
             valign: 'middle',
-            formatter: function (value, row, index) {
-                if (row['status'] === 0) {
-                    return "正常";
-                } else {
-                    return "禁用";
-                }
-            }
+            formatter: test
         },
         {title: 'groupId', field: 'groupId', visible: true, align: 'center', valign: 'middle'},
         {title: '机构Id', field: 'instId', visible: true, align: 'center', valign: 'middle'},
@@ -105,29 +99,41 @@ Bonguser.delete = function () {
         ajax.start();
     }
 };
+/**
+ * 查询表单提交参数对象
+ * @returns {{}}
+ */
+Bonguser.formParams = function () {
+    var queryData = {};
+
+    queryData['condition'] = $("#condition").val();
+
+    return queryData;
+}
 
 /**
  * 查询用户列表
  */
 Bonguser.search = function () {
-    var queryData = {};
-    queryData['condition'] = $("#condition").val();
-    Bonguser.table.refresh({query: queryData});
+    Bonguser.table.refresh({query: Bonguser.formParams()});
 };
 
 $(function () {
     var defaultColunms = Bonguser.initColumn();
     var table = new BSTable(Bonguser.id, "/bonguser/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("service");
+    table.setQueryParams(Bonguser.formParams());
     Bonguser.table = table.init();
 });
 
-// function test(value, row, index) {
-//         // alert(value + ", " + row['status'] + ", " + index);
-//
-//     // return row['status'];
-//         return [
-//             '<\#button name="添加" icon="fa-plus" clickFun="Bonguser.openAddBonguser()"/> '
-//         ].join('');
-//
-// }
+function test(value, row, index) {
+    // alert(value + ", " + row['status'] + ", " + index);
+
+    // return row['status'];
+    return [
+        '<button type="button" class="btn btn-primary " onclick="Bonguser.openAddBonguser()" id="">' +
+        '<i class="fa fa-plus"></i>&nbsp;绑定' +
+        ' </button>'
+    ].join('');
+
+}
