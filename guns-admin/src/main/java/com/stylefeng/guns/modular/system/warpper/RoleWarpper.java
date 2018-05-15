@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class RoleWarpper extends BaseControllerWarpper {
 
+
+
     public RoleWarpper(List<Map<String, Object>> list) {
         super(list);
     }

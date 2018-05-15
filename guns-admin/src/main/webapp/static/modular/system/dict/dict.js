@@ -13,7 +13,7 @@ var Dict = {
  */
 Dict.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '名称', field: 'name', align: 'center', valign: 'middle', sortable: true},
         {title: '详情', field: 'detail', align: 'center', valign: 'middle', sortable: true},
@@ -53,16 +53,21 @@ Dict.openAddDict = function () {
  * 打开查看字典详情
  */
 Dict.openDictDetail = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '字典详情',
-            area: ['800px', '420px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/dict/dict_edit/' + Dict.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '字典详情',
+                area: ['800px', '420px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/dict/dict_edit/' + Dict.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

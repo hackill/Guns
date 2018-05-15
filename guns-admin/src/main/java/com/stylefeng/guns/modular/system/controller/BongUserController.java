@@ -2,11 +2,13 @@ package com.stylefeng.guns.modular.system.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.common.annotion.Permission;
 import com.stylefeng.guns.core.common.constant.factory.PageFactory;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.modular.system.model.SysOperationLog;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IBongUserService;
+import com.stylefeng.guns.modular.system.warpper.BongUserWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,6 +73,7 @@ public class BongUserController extends BaseController {
     /**
      * 获取用户列表
      */
+
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(@RequestParam(required = false) String condition) {
@@ -85,10 +88,13 @@ public class BongUserController extends BaseController {
 //        };
 
 
-        List<Map<String, Object>> result = bonguserService.selectMaps(null);
+        List<Map<String, Object>> result = bonguserService.getBongUserList();
 
-        return bonguserService.selectList(null);
+
+        return super.warpObject(new BongUserWarpper(result));
+//        return  result;
     }
+
 
     /**
      * 新增用户

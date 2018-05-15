@@ -13,7 +13,7 @@ var OptLog = {
  */
 OptLog.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '日志类型', field: 'logtype', align: 'center', valign: 'middle', sortable: true},
         {title: '日志名称', field: 'logname', align: 'center', valign: 'middle', sortable: true},
@@ -43,13 +43,18 @@ OptLog.check = function () {
  * 查看日志详情
  */
 OptLog.detail = function () {
-    if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/log/detail/" + this.seItem.id, function (data) {
-            Feng.infoDetail("日志详情", data.regularMessage);
-        }, function (data) {
-            Feng.error("获取详情失败!");
-        });
-        ajax.start();
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var ajax = new $ax(Feng.ctxPath + "/log/detail/" + this.seItem.id, function (data) {
+                Feng.infoDetail("日志详情", data.regularMessage);
+            }, function (data) {
+                Feng.error("获取详情失败!");
+            });
+            ajax.start();
+        }
     }
 };
 

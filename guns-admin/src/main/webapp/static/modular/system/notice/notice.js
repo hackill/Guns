@@ -13,7 +13,7 @@ var Notice = {
  */
 Notice.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '标题', field: 'title', align: 'center', valign: 'middle', sortable: true},
         {title: '内容', field: 'content', align: 'center', valign: 'middle', sortable: true},
@@ -55,16 +55,21 @@ Notice.openAddNotice = function () {
  * 打开查看通知详情
  */
 Notice.openNoticeDetail = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '通知详情',
-            area: ['800px', '420px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/notice/notice_update/' + Notice.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '通知详情',
+                area: ['800px', '420px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/notice/notice_update/' + Notice.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

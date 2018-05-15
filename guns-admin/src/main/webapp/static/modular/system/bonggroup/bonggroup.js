@@ -13,7 +13,7 @@ var Bonggroup = {
  */
 Bonggroup.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
             {title: '主键', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '组编号', field: 'code', visible: true, align: 'center', valign: 'middle'},
             {title: '组名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
@@ -58,16 +58,21 @@ Bonggroup.openAddBonggroup = function () {
  * 打开查看群主详情
  */
 Bonggroup.openBonggroupDetail = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '群主详情',
-            area: ['800px', '420px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/bonggroup/bonggroup_update/' + Bonggroup.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '群主详情',
+                area: ['800px', '420px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/bonggroup/bonggroup_update/' + Bonggroup.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

@@ -13,7 +13,7 @@ var Dept = {
  */
 Dept.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', align: 'center', valign: 'middle',width:'50px'},
         {title: '部门简称', field: 'simplename', align: 'center', valign: 'middle', sortable: true},
         {title: '部门全称', field: 'fullname', align: 'center', valign: 'middle', sortable: true},
@@ -54,16 +54,21 @@ Dept.openAddDept = function () {
  * 打开查看部门详情
  */
 Dept.openDeptDetail = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '部门详情',
-            area: ['800px', '420px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/dept/dept_update/' + Dept.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '部门详情',
+                area: ['800px', '420px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/dept/dept_update/' + Dept.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

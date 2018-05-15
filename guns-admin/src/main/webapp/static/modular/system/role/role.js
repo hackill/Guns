@@ -13,7 +13,7 @@ var Role = {
  */
 Role.initColumn = function () {
     var columns = [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '名称', field: 'name', align: 'center', valign: 'middle', sortable: true},
         {title: '上级角色', field: 'pName', align: 'center', valign: 'middle', sortable: true},
@@ -56,16 +56,21 @@ Role.openAddRole = function () {
  * 点击修改按钮时
  */
 Role.openChangeRole = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '修改角色',
-            area: ['800px', '450px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/role/role_edit/' + this.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '修改角色',
+                area: ['800px', '450px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/role/role_edit/' + this.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

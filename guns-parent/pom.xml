@@ -77,6 +77,14 @@
                 <artifactId>mybatisplus-spring-boot-starter</artifactId>
                 <version>${mybatisplus-spring-boot-starter.version}</version>
             </dependency>
+
+            <!--单元测试用-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.7</version>
+                <scope>test</scope>
+            </dependency>
             <!--shiro依赖-->
             <dependency>
                 <groupId>org.apache.shiro</groupId>

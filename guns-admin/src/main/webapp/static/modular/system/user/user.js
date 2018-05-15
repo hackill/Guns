@@ -14,7 +14,7 @@ var MgrUser = {
  */
 MgrUser.initColumn = function () {
     var columns = [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
         {title: 'id', field: 'id', visible: false, align: 'center', valign: 'middle'},
         {title: '账号', field: 'account', align: 'center', valign: 'middle', sortable: true},
         {title: '姓名', field: 'name', align: 'center', valign: 'middle', sortable: true},
@@ -62,16 +62,21 @@ MgrUser.openAddMgr = function () {
  * @param userId 管理员id
  */
 MgrUser.openChangeUser = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '编辑管理员',
-            area: ['800px', '450px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/mgr/user_edit/' + this.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else {
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '编辑管理员',
+                area: ['800px', '450px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/mgr/user_edit/' + this.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 

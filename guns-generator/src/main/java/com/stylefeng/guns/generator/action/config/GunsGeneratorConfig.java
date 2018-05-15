@@ -9,18 +9,18 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
  * @author fengshuonan
  * @date 2017-10-28-下午8:27
  */
-public class GunsGeneratorConfig extends AbstractGeneratorConfig {
+public class  GunsGeneratorConfig extends AbstractGeneratorConfig {
 
     protected void globalConfig() {
 
         //写自己项目的绝对路径,注意具体到java目录
-        globalConfig.setOutputDir("/Users/hackill/IntellijProjects/Guns/guns-admin/src/main/java");
+        globalConfig.setOutputDir("/Users/bong/Documents/gongkeschool/Guns/guns-admin/src/main/java");
         globalConfig.setFileOverride(true);
         globalConfig.setEnableCache(false);
         globalConfig.setBaseResultMap(true);
         globalConfig.setBaseColumnList(true);
         globalConfig.setOpen(false);
-        globalConfig.setAuthor("hackill");
+        globalConfig.setAuthor("wang");
     }
 
     protected void dataSourceConfig() {
@@ -34,7 +34,7 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     protected void strategyConfig() {
         //// 此处可以修改为您的表前缀 自动过滤前缀
 //        strategyConfig.setTablePrefix(new String[]{""});
-        strategyConfig.setInclude(new String[]{"bong_group"});
+        strategyConfig.setInclude(new String[]{"class_room"});
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
     }
 
@@ -49,20 +49,20 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
         packageConfig.setXml("dao.mapping");
 
         //本项目未用到 随便写个文件夹 用于以后删除
-        packageConfig.setController("TTT");
-        packageConfig.setServiceImpl("TTT");
-        packageConfig.setService("TTT");
+//        packageConfig.setController("TTT");
+//        packageConfig.setServiceImpl("TTT");
+//        packageConfig.setService("TTT");
     }
 
     protected void contextConfig() {
 
         contextConfig.setProPackage("com.stylefeng.guns");
 //        contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
-        contextConfig.setBizChName("群主");
-        contextConfig.setBizEnName("bonggroup");
+        contextConfig.setBizChName("教室管理");
+        contextConfig.setBizEnName("classRoom");
         contextConfig.setModuleName("system");
-        contextConfig.setProjectPath("/Users/hackill/IntellijProjects/Guns/guns-admin");//写自己项目的绝对路径
-        contextConfig.setEntityName("BongGroup");
+        contextConfig.setProjectPath("/Users/bong/Documents/gongkeschool/Guns/guns-admin");//写自己项目的绝对路径
+        contextConfig.setEntityName("ClassRoom");
 
         sqlConfig.setParentMenuName(null);//这里写已有菜单的名称,当做父节点
 

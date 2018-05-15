@@ -13,27 +13,29 @@ var Bonguser = {
  */
 Bonguser.initColumn = function () {
     return [
-        {field: 'selectItem', radio: true},
+        {field: 'selectItem', checkboxes: true},
+        {title: '编号',field:'num', align:'center', visible: true, valign: 'middle'},
         {title: '主键', field: 'id', visible: false, align: 'center', valign: 'middle'},
-        {title: '用户编号', field: 'code', visible: true, align: 'center', valign: 'middle'},
+        {title: '用户编号', field: 'code', visible: false, align: 'center', valign: 'middle'},
         {title: '姓名', field: 'name', visible: true, align: 'center', valign: 'middle'},
         {title: '电话号码', field: 'phoneNumber', visible: false, align: 'center', valign: 'middle'},
         {title: '性别', field: 'gender', visible: true, align: 'center', valign: 'middle'},
-        {title: '出生年', field: 'birthday', visible: true, align: 'center', valign: 'middle'},
-        {title: '身高', field: 'height', visible: true, align: 'center', valign: 'middle'},
-        {title: '用户类型', field: 'type', visible: false, align: 'center', valign: 'middle'},
-        {title: '备注', field: 'comment', visible: true, align: 'center', valign: 'middle'},
+        {title: '出生年', field: 'birthday', visible: false, align: 'center', valign: 'middle'},
+        {title: '身高', field: 'height', visible: false, align: 'center', valign: 'middle'},
+        {title: '备注', field: 'comment', visible: false, align: 'center', valign: 'middle'},
         {
             title: '状态',
             field: 'status',
             visible: true,
             align: 'center',
             valign: 'middle',
-            formatter: test
+            // formatter: test
         },
-        {title: 'groupId', field: 'groupId', visible: true, align: 'center', valign: 'middle'},
-        {title: '机构Id', field: 'instId', visible: true, align: 'center', valign: 'middle'},
-        {title: '创建时间', field: 'createTime', visible: true, align: 'center', valign: 'middle'},
+        {title: '手环mac地址', field: 'bong_mac', visible: true, align: 'center', valign: 'middle',formatter: test},
+        {title: '手环nfc编号', field: 'nfc_code', visible: false, align: 'center', valign: 'middle'},
+        {title: '班级', field: 'bName', visible: true, align: 'center', valign: 'middle'},
+        {title: '机构', field: 'iName', visible: true, align: 'center', valign: 'middle'},
+        {title: '创建时间', field: 'createTime', visible: false, align: 'center', valign: 'middle'},
         {title: '修改时间', field: 'modifyTime', visible: false, align: 'center', valign: 'middle'}
     ];
 };
@@ -71,16 +73,21 @@ Bonguser.openAddBonguser = function () {
  * 打开查看用户详情
  */
 Bonguser.openBonguserDetail = function () {
-    if (this.check()) {
-        var index = layer.open({
-            type: 2,
-            title: '用户详情',
-            area: ['800px', '420px'], //宽高
-            fix: false, //不固定
-            maxmin: true,
-            content: Feng.ctxPath + '/bonguser/bonguser_update/' + Bonguser.seItem.id
-        });
-        this.layerIndex = index;
+    var selected = $('#' + this.id).bootstrapTable('getSelections');
+    if (selected.length > 1){
+        Feng.info("请选择一条数据进行操作")
+    }else{
+        if (this.check()) {
+            var index = layer.open({
+                type: 2,
+                title: '用户详情',
+                area: ['800px', '420px'], //宽高
+                fix: false, //不固定
+                maxmin: true,
+                content: Feng.ctxPath + '/bonguser/bonguser_update/' + Bonguser.seItem.id
+            });
+            this.layerIndex = index;
+        }
     }
 };
 
@@ -130,10 +137,15 @@ function test(value, row, index) {
     // alert(value + ", " + row['status'] + ", " + index);
 
     // return row['status'];
-    return [
-        '<button type="button" class="btn btn-primary " onclick="Bonguser.openAddBonguser()" id="">' +
-        '<i class="fa fa-plus"></i>&nbsp;绑定' +
-        ' </button>'
-    ].join('');
+    if(row["bong_mac"] == undefined){
+        return [
+            '<button type="button" class="btn btn-primary " onclick="Bonguser.openAddBonguser()" id="">' +
+            '<i class="fa fa-plus"></i>&nbsp;绑定' +
+            ' </button>'
+        ].join('');
+
+    }else{
+        return row['bong_mac'];
+    }
 
 }

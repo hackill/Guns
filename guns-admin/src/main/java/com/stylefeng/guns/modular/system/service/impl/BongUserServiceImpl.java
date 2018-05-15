@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.stylefeng.guns.modular.system.dao.UserMapper;
 import com.stylefeng.guns.modular.system.model.User;
 import com.stylefeng.guns.modular.system.service.IBongUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,8 @@ import java.util.Map;
 @Service
 public class BongUserServiceImpl extends ServiceImpl<UserMapper, User> implements IBongUserService {
 
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Page<Map<String, Object>> selectMapsPage(Page page, Wrapper<User> wrapper) {
@@ -64,4 +67,9 @@ public class BongUserServiceImpl extends ServiceImpl<UserMapper, User> implement
         return super.selectMap(wrapper);
     }
 
+
+    @Override
+    public List<Map<String, Object>> getBongUserList() {
+        return userMapper.getBongUserList();
+    }
 }
