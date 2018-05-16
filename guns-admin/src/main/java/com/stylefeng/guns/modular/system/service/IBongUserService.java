@@ -16,6 +16,16 @@ import java.util.Map;
  */
 public interface IBongUserService extends IService<User> {
 
+    /**
+     * 获取用户列表
+     * @return
+     */
     List<Map<String, Object>> getBongUserList();
+
+    /**
+     * 获取未绑定的手环列表
+     * @return
+     */
+    List<Map<String,Object>> getBongDevice();
 
 }

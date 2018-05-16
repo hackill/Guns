@@ -19,7 +19,15 @@ import java.util.Map;
 @Repository("userMapper")
 public interface UserMapper extends BaseMapper<User> {
 
-
+    /**
+     * 获取用户列表
+     * @return
+     */
     List<Map<String,Object>> getBongUserList();
 
+    /**
+     * 获取未绑定的手环列表
+     * @return
+     */
+    List<Map<String,Object>> getBongDevice();
 }

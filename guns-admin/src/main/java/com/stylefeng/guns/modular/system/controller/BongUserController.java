@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,15 @@ public class BongUserController extends BaseController {
 
 
         return PREFIX + "bonguser_edit.html";
+    }
+
+    /**
+     * 跳转到未绑定的手环列表页面
+     * @return
+     */
+    @RequestMapping("/getBongDeviceList")
+    public String getBongDeviceList(){
+        return PREFIX + "bongDevice_add.html";
     }
 
     /**
@@ -133,5 +143,13 @@ public class BongUserController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("bonguserId") Integer bonguserId) {
         return bonguserService.selectById(bonguserId);
+    }
+
+
+    @RequestMapping(value = "/getBongDevice")
+    @ResponseBody
+    public Object getBongDevice(@RequestParam(required = false) String condition){
+        List<Map<String,Object>> list = bonguserService.getBongDevice();
+        return list;
     }
 }

@@ -106,6 +106,23 @@ Bonguser.delete = function () {
         ajax.start();
     }
 };
+
+/**
+ * 跳转绑定手环页面
+ */
+Bonguser.addDevice = function () {
+    var index = layer.open({
+        type : 2,
+        title : "绑定手环设备",
+        area:['400px','200px'],//宽高
+        fix: false,
+        maxmin: true,
+        content: Feng.ctxPath + '/bonguser/getBongDeviceList'
+    });
+    this.layerIndex = index;
+
+}
+
 /**
  * 查询表单提交参数对象
  * @returns {{}}
@@ -139,7 +156,7 @@ function test(value, row, index) {
     // return row['status'];
     if(row["bong_mac"] == undefined){
         return [
-            '<button type="button" class="btn btn-primary " onclick="Bonguser.openAddBonguser()" id="">' +
+            '<button type="button" class="btn btn-primary " onclick="Bonguser.addDevice()" id="">' +
             '<i class="fa fa-plus"></i>&nbsp;绑定' +
             ' </button>'
         ].join('');

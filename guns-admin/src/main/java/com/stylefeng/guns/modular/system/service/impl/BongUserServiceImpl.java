@@ -72,4 +72,11 @@ public class BongUserServiceImpl extends ServiceImpl<UserMapper, User> implement
     public List<Map<String, Object>> getBongUserList() {
         return userMapper.getBongUserList();
     }
+
+    @Override
+    public List<Map<String, Object>> getBongDevice() {
+        return userMapper.getBongDevice();
+    }
+
+
 }

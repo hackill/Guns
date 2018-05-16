@@ -28,28 +28,34 @@
 
 
    <select id="getBongUserList" resultType="map">
-    select u.id,
-        u.code,
-        u.name,
-        u.gender,
-        u.birthday,
-        u.height,
-        u.phone_number AS phoneNumber,
-        u.type,
-        u.comment,
-        u.status,
-        u.create_time AS createTime,
-        u.modify_time AS modifyTime,
-        b.name as bName,
-        i.name as iName,
-        di.`bong_mac`,
-        di.`nfc_code`,
-        @y:=@y + 1 AS num
-        from (SELECT @y:= 0) c,
-        user  u left join `device_info`  di on u.id = di.`user_id`
-        ,bong_group  b
-        , institution  i
-        where u.group_id = b.id
-        and u.inst_id = i.id
+    select  u.id,
+            u.code,
+            u.name,
+            u.gender,
+            u.birthday,
+            u.height,
+            u.phone_number AS phoneNumber,
+            u.type,
+            u.comment,
+            u.status,
+            u.create_time AS createTime,
+            u.modify_time AS modifyTime,
+            b.name as bName,
+            i.name as iName,
+            di.`bong_mac`,
+            di.`nfc_code`,
+            @y:=@y + 1 AS num
+            from (SELECT @y:= 0) c,
+            user  u left join `device_info`  di on u.id = di.`user_id`
+            ,bong_group  b
+            , institution  i
+            where u.group_id = b.id
+            and u.inst_id = i.id
+    </select>
+
+    <select id="getBongDevice" resultType="map">
+        select `bong_mac` from `device_info` where user_id is null
+
+
     </select>
 </mapper>
